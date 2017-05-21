@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Interstellar Technologies Inc. All Rights Reserved.
 
-from __future__ import print_function
+
 import numpy as np
 import matplotlib.pyplot as plt
 from OpenGoddard.optimize import Problem, Guess, Condition, Dynamics

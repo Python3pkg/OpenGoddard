@@ -4,7 +4,7 @@
 # 摩擦などはないと仮定している。
 # スケールはDIDOのマニュアル参考
 
-from __future__ import print_function
+
 import numpy as np
 import matplotlib.pyplot as plt
 from OpenGoddard.optimize import Problem, Guess, Condition, Dynamics

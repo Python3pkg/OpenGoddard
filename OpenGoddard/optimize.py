@@ -343,7 +343,7 @@ class Problem:
         if (section == 0):
             return self.t0
         else:
-            time_start_index = range(-self.number_of_section - 1, 0)
+            time_start_index = list(range(-self.number_of_section - 1, 0))
             return self.p[time_start_index[section]] * self.unit_time
 
     def time_final(self, section):
@@ -356,7 +356,7 @@ class Problem:
             time_final (int) : time at section end
 
         """
-        time_final_index = range(-self.number_of_section, 0)
+        time_final_index = list(range(-self.number_of_section, 0))
         return self.p[time_final_index[section]] * self.unit_time
 
     def time_final_all_section(self):
@@ -436,7 +436,7 @@ class Problem:
             value (float) : value
 
         """
-        time_final_index = range(-self.number_of_section, 0)
+        time_final_index = list(range(-self.number_of_section, 0))
         self.p[time_final_index[section]] = value / self.unit_time
 
     def time_to_tau(self, time):
@@ -501,7 +501,7 @@ class Problem:
         return div_front + index
 
     def index_time_final(self, section):
-        time_final_range = range(-self.number_of_section, 0)
+        time_final_range = list(range(-self.number_of_section, 0))
         return self.number_of_variables + time_final_range[section]
 
     """
@@ -669,7 +669,7 @@ class Problem:
         maxiter = options.setdefault("maxiter", 25)
 
         while self.iterator < self.maxIterator:
-            print("---- iteration : {0} ----".format(self.iterator+1))
+            print(("---- iteration : {0} ----".format(self.iterator+1)))
             opt = optimize.minimize(wrap_for_solver(cost_add, self.cost, obj),
                                     self.p,
                                     args=(self, obj),
@@ -679,7 +679,7 @@ class Problem:
                                     options={"disp": True,
                                              "maxiter": maxiter,
                                              "ftol": ftol})
-            print(opt.message)
+            print((opt.message))
             display_func()
             print("")
             if not(opt.status):
@@ -789,7 +789,7 @@ class Problem:
             header += "control%d, " % (i)
             result = np.vstack((result, self.controls_all_section(i)))
         np.savetxt(filename, result.T, delimiter=delimiter, header=header)
-        print("Completed saving \"%s\"" % (filename))
+        print(("Completed saving \"%s\"" % (filename)))
 
     def plot(self, title_comment=""):
         """ plot inner variables that to be optimized
@@ -1069,19 +1069,19 @@ if __name__ == '__main__':
 
     prob = Problem(time_init, n, num_states, num_controls, max_iteration)
 
-    print("t0 = %.1f\nnodes = " % (prob.t0))
+    print(("t0 = %.1f\nnodes = " % (prob.t0)))
     print(n)
     print("number of states = ")
     print(num_states)
     print("number of controls = ")
     print(num_controls)
     print("tau = ")
-    print(prob.tau)
+    print((prob.tau))
     # print("D = ")
     # print(prob.D)
     print("div = ")
-    print(prob.div)
-    print("=====" * 10)
+    print((prob.div))
+    print(("=====" * 10))
 
     time_init = [0.0, 0.10, 0.2]
     n = [20, 10]
@@ -1091,39 +1091,39 @@ if __name__ == '__main__':
 
     prob = Problem(time_init, n, num_states, num_controls, max_iteration)
 
-    print("t0 = %.1f\nnodes = " % (prob.t0))
+    print(("t0 = %.1f\nnodes = " % (prob.t0)))
     print(n)
     print("number of states = ")
     print(num_states)
     print("number of controls = ")
     print(num_controls)
     print("tau = ")
-    print(prob.tau)
+    print((prob.tau))
     print("time_init = ")
-    print(prob.time)
+    print((prob.time))
     print("time_all_section = ")
-    print(prob.time_all_section)
+    print((prob.time_all_section))
     # print("D = ")
     # print(prob.D)
     print("div = ")
-    print(prob.div)
-    print("=====" * 10)
+    print((prob.div))
+    print(("=====" * 10))
 
     print("p = ")
-    print(np.round(prob.p, 0))
+    print((np.round(prob.p, 0)))
     print("states #0 all section = ")
-    print(prob.states_all_section(0))
+    print((prob.states_all_section(0)))
     print("states #1 all section = ")
-    print(prob.states_all_section(1))
+    print((prob.states_all_section(1)))
     print("controls #0 section #0 = ")
-    print(prob.controls(0, 0))
+    print((prob.controls(0, 0)))
     print("controls #0 all section = ")
-    print(prob.controls_all_section(0))
+    print((prob.controls_all_section(0)))
     print("time final #0 = ")
-    print(prob.time_final(0))
+    print((prob.time_final(0)))
     print("time final #1 = ")
-    print(prob.time_final(1))
-    print("=====" * 10)
+    print((prob.time_final(1)))
+    print(("=====" * 10))
 
     plt.close("all")
     tau = prob.tau
@@ -1146,8 +1146,8 @@ if __name__ == '__main__':
     prob.set_controls_all_section(0, T_init)
 
     print("p =")
-    print(np.round(prob.p, 2))
-    print("=====" * 10)
+    print((np.round(prob.p, 2)))
+    print(("=====" * 10))
 
     print("=====                       ====")
     print("===== Rocket Ascent Problem ====")
@@ -1228,14 +1228,14 @@ if __name__ == '__main__':
     result_eq = equality(prob, obj)
     result_ineq = inequality(prob, obj)
     print("dx section #0")
-    print(np.round(dx0, 2))
+    print((np.round(dx0, 2)))
     print("dx section #0")
-    print(np.round(dx1, 2))
+    print((np.round(dx1, 2)))
     print("equality = ")
-    print(np.round(result_eq, 2))
+    print((np.round(result_eq, 2)))
     print("inequality = ")
-    print(np.round(result_ineq, 2))
-    print("=====" * 10)
+    print((np.round(result_ineq, 2)))
+    print(("=====" * 10))
 
     prob.dynamics = [dynamics, dynamics]
     prob.knot_states_smooth = [True]
@@ -1246,7 +1246,7 @@ if __name__ == '__main__':
 
     def display_func():
         h = prob.states_all_section(0)
-        print("max altitude: {0:.5f}".format(h[-1]))
+        print(("max altitude: {0:.5f}".format(h[-1])))
 
     prob.solve(obj, display_func)
 
@@ -1539,7 +1539,7 @@ if __name__ == '__main__':
 
     def display_func():
         tf = prob.time_final(-1)
-        print("tf: {0:.5f}".format(tf))
+        print(("tf: {0:.5f}".format(tf)))
 
     prob.solve(obj, display_func)
 
